@@ -6,9 +6,23 @@ public class Main {
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select a page : ");
-        int service = scanner.nextInt();
-        while (service !=5) {
+        System.out.print("*-*-*-*Ekmekçi'ye hoşgeldiniz*-*-*-*"+
+                         "\n1-Ürün stok" +
+                         "\n2-Hizmet satış" +
+                         "\n3-Müşteri hesap  sayfası" +
+                         "\n4-İşletme Defteri"+
+                         "\n5-Çıkış"+
+                         "\nLütfen bir sayfa seçin: ");
+        int service;
+        do{
+        service = scanner.nextInt();
+            System.out.println("Yönlendiriliyor...");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             switch (service) {
                 case 1:
                     page1();
@@ -30,32 +44,75 @@ public class Main {
                     System.out.println("Geçersiz seçenek. Lütfen tekrar deneyin.");
             }
         }
-    }
+        while (service !=5);
+        }
+
     private static void page1() {
         Bread bread = new Bread();
         Egg egg = new Egg();
         Coal coal = new Coal();
-        System.out.println("Ürün stok sayfasına hoşgeldiniz.");
-        System.out.print("Yapmak istedğiniz işlemi seçiniz : " +
-                "\n1 - Tüm ürünler için stok ve fiyat bilgisini göster" +
-                "\n2 - Stok bilgisini güncelle" +
-                "\n3 - Fiyat bilgisini güncelle\n"
+        System.out.println("Ürün stok sayfasına hoşgeldiniz."+
+                        "\nYapmak istedğiniz işlemi seçiniz:  " +
+                        "\n1 - Tüm ürünler için stok ve fiyat bilgisini göster" +
+                        "\n2 - Stok bilgisini güncelle" +
+                        "\n3 - Fiyat bilgisini güncelle\n"
                 );
         Scanner scanner = new Scanner(System.in);
         int selectOperation = scanner.nextInt();
+        System.out.println("Hesaplanıyor...");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         switch (selectOperation) {
             case 1:
-                System.out.println("Stoktaki ekmek miktarı: " + bread.getStock()+
-                        "\nEkmek fiyatı: "+ bread.getPrice());
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("Ekmek stok miktarı: " + bread.getStock()+ " Ekmek fiyatı: "+ bread.getPrice() +
+                        "\nYumurta stok miktarı: " + egg.getStock()+ " Yumurta fiyatı: "+ egg.getPrice() +
+                        "\nKömür stok miktarı: " + coal.getStock()+ " Kömür fiyatı: "+ coal.getPrice());
                 break;
             case 2:
+                System.out.println("Lütfen stok bilgisi güncellenecek ürünü seçin: "+
+                        "\n1-Ekmek \n2-Yumurta \n3-Kömür");
+                int selectOperation2 = scanner.nextInt();
+                System.out.println("Lütfen yeni değeri girin");
+                int newStockValue=scanner.nextInt();
+                switch (selectOperation2){
+                    case 1:
+                        bread.setStock(newStockValue);
+                        System.out.println("Stok değeri: " + bread.getStock());
+                        break;
+                    case 2:
+                        egg.setStock(newStockValue);
+                        System.out.println("Stok değeri: " + egg.getStock());
+                        break;
+                    case 3:
+                        coal.setStock(newStockValue);
+                        System.out.println("Stok değeri: " + coal.getStock());
+                        break;
+                }
                 break;
             case 3:
+                System.out.println("Lütfen fiyat bilgisi güncellenecek ürünü seçin: "+
+                        "\n1-Ekmek \n2-Yumurta \n3-Kömür");
+                int selectOperation3 = scanner.nextInt();
+                System.out.println("Lütfen yeni değeri girin");
+                int newPriceValue=scanner.nextInt();
+                switch (selectOperation3){
+                    case 1:
+                        bread.setPrice(newPriceValue);
+                        System.out.println("Fiyat değeri: " + bread.getPrice());
+                        break;
+                    case 2:
+                        egg.setPrice(newPriceValue);
+                        System.out.println("Fiyat değeri: " + egg.getPrice());
+                        break;
+                    case 3:
+                        coal.setPrice(newPriceValue);
+                        System.out.println("Fiyat değeri: " + coal.getPrice());
+                        break;
+                }
                 break;
         }
     }
@@ -73,7 +130,6 @@ public class Main {
                 Customer customer1 = new Customer(customerName);
                 customer1.name = customerName;
                 customerList.add(customerName);
-
                 break;
             case 2:
                 for (String customers : customerList) {
@@ -84,10 +140,8 @@ public class Main {
     }
     private static void page3() {
         System.out.println("Müşteri hesap  sayfasına hoşgeldiniz.");
-        // Sayfa 1'e özgü işlemler burada yapılabilir
     }
     private static void page4() {
-        System.out.println("İşletme Defteri  sayfasına hoşgeldiniz.");
-        // Sayfa 1'e özgü işlemler burada yapılabilir
+        System.out.println("İşletme Defteri sayfasına hoşgeldiniz.");
     }
 }
